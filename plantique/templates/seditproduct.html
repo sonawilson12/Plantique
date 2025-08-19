@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product - Plantique</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0fff0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .form-container {
+            max-width: 420px;
+            background: white;
+            margin: 60px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            border: 2px solid #006400;
+        }
+
+        .form-container h2 {
+            color: #2e7d32;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 6px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            padding: 3px;
+        }
+
+        .submit-button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #388e3c;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+
+        .current-image {
+            margin-top: 10px;
+        }
+
+        .current-image img {
+            max-width: 100px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Edit Product
+</header>
+
+<div class="form-container">
+    <h2>Edit Indoor Plant</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="name">Plant Name</label>
+            <input type="text" id="name" name="name" value="{{ p.name }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Plant Image</label>
+            <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)">
+            <div class="current-image">
+                <p>Current Image:</p>
+                <img id="imagePreview" src="{% if p.image %}{{ p.image.url }}{% else %}#{% endif %}" alt="{{ p.name }}" {% if not p.image %}style="display:none;"{% endif %}>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" value="{{ p.quantity }}" min="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price (₹)</label>
+            <input type="number" id="price" name="price" value="{{ p.price }}" min="0" required>
+        </div>
+
+        <button type="submit" class="submit-button">Save Changes</button>
+    </form>
+
+    <a href="{% url 'sproductlist' %}" class="back-link">← Back to Product List</a>
+</div>
+
+<div class="footer">
+    © 2025 Plantique. All rights reserved.
+</div>
+
+<script>
+    function previewImage(event) {
+        const imagePreview = document.getElementById('imagePreview');
+        const file = event.target.files[0];
+        if (file) {
+            imagePreview.src = URL.createObjectURL(file);
+            imagePreview.style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>

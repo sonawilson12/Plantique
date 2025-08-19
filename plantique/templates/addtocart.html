@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart - Plantique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: #e0f0e9;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #1e8449;
+            color: inherit;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 100px; /* Reduced size for smaller image */
+            height: auto; /* Maintain aspect ratio to show full image */
+            object-fit: contain; /* Ensure full image is visible without cropping */
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0 5px;
+            font-size: 1.1rem;
+            color: rgb(20, 52, 20);
+        }
+
+        .product-card p {
+            font-size: 0.85rem;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: rgb(20, 52, 20);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #1e8449;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            background-color: #f1f8e9;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input[type="number"]:focus {
+            outline: none;
+            border-color: #388e3c;
+            background-color: #ffffff;
+        }
+
+        .add-to-cart-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart-button i {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #388e3c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Plantique - Add to Cart
+    </header>
+
+    <div class="container">
+        <div class="product-card">
+            <img src="/media/{{ p.image }}" alt="Image of {{ p.name }}" class="product-image">
+            <h3>{{ p.name }}</h3>
+            <p>Price: ₹{{ p.price }}</p>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" min="1" required placeholder="Enter quantity">
+                </div>
+                <button type="submit" class="add-to-cart-button"><i class="fas fa-cart-plus"></i>Add to Cart</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2025 Plantique. All rights reserved.
+    </div>
+</body>
+</html>

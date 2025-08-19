@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List - Plantique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e8f5e9;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), 
+                              url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #e8f5e9; /* Match body background */
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), 
+                              url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        tr:hover {
+            background-color: #d4e8dd; /* Slightly darker shade for contrast */
+            transform: scale(1.01);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #4CAF50;
+        }
+
+        .user-name {
+            color: #2e7d32;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .user-info {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+        .empty-users {
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            padding: 40px;
+            background: #e8f5e9;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), 
+                              url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #aaa;
+            font-size: 0.8rem;
+            border-top: 1px solid #ccc;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                font-size: 1.3rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            th, td {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+
+            .profile-img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        User List
+    </header>
+
+    <div class="container">
+        {% if u %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Profile</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in u %}
+                        <tr>
+                            <td><img src="{{ user.image.url|default:'/static/default-user.png' }}" alt="Image of {{ user.name }}" class="profile-img"></td>
+                            <td><span class="user-name">{{ user.name|default:"N/A" }}</span></td>
+                            <td><span class="user-info">{{ user.age|default:"N/A" }}</span></td>
+                            <td><span class="user-info">{{ user.email|default:"N/A" }}</span></td>
+                            <td>
+                                <form method="post" action="{% url 'deleteuser' user.id %}" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-delete">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="empty-users">No users available.</p>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        © 2025 Plantique. All rights reserved.
+    </div>
+</body>
+</html>

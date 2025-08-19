@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantique - Assign Delivery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .order-details {
+            background: #e0f0e9;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin: 20px auto 40px;
+            border: 2px solid #2E7D32;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .order-details h2 {
+            color: #4CAF50;
+            font-size: 1.1rem;
+            margin: 0 0 10px;
+        }
+
+        .order-details p {
+            margin: 5px 0;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .assign-form {
+            background: #e0f0e9;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            border: 2px solid #2E7D32;
+        }
+
+        .assign-form label {
+            font-size: 1rem;
+            color: #555;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .assign-form select {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.9rem;
+            border: 1px solid #2E7D32;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .assign-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .assign-button:hover {
+            background-color: #2E7D32;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            padding: 40px;
+            background: #e0f0e9;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+            margin: 40px auto;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Plantique - Assign Delivery
+    </header>
+
+    <div class="container">
+        <div class="order-details">
+            <h2>Order Details</h2>
+            {% if order.product.image %}
+                <img src="{{ order.product.image.url }}" alt="{{ order.product.name|default:'Product' }}" class="product-image">
+            {% else %}
+                <img src="https://via.placeholder.com/80" alt="No image available" class="product-image">
+            {% endif %}
+            <p><strong>User:</strong> {{ order.user.name }}</p>
+            <p><strong>Product:</strong> {{ order.product.name|default:"Not specified" }}</p>
+            <p><strong>Address:</strong> {{ order.address|default:"Not provided" }}</p>
+            <p><strong>Phone:</strong> {{ order.phone_no|default:"Not provided" }}</p>
+        </div>
+
+        {% if delivery_people %}
+            <form class="assign-form" method="post" action="{% url 'assigndelivery' order.id %}">
+                {% csrf_token %}
+                <label for="delivery_person_id">Select Delivery Person:</label>
+                <select name="delivery_person_id" id="delivery_person_id" required>
+                    <option value="" disabled selected>Select a delivery person</option>
+                    {% for person in delivery_people %}
+                        <option value="{{ person.id }}">{{ person.name }} ({{ person.email }})</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="assign-button"><i class="fas fa-truck"></i> Assign Delivery</button>
+            </form>
+        {% else %}
+            <p class="empty-message">No approved delivery persons available.</p>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        © 2025 Plantique. All rights reserved.
+    </div>
+</body>
+</html>

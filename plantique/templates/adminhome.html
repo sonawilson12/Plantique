@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Indoor Plant Shop - Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid #2E7D32;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+        }
+
+        .card i {
+            font-size: 2rem;
+            color: #4CAF50;
+            margin-bottom: 8px;
+        }
+
+        .card h3 {
+            margin: 8px 0 4px;
+            font-size: 1rem;
+        }
+
+        .card p {
+            font-size: 0.8rem;
+            color: #555;
+            margin: 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    Welcome to Plantique - Admin Panel
+</header>
+
+<div class="container">
+    <a href="/userlist/" class="card">
+        <i class="fas fa-users"></i>
+        <h3>Manage Users</h3>
+        <p>View and manage user accounts.</p>
+    </a>
+
+    <a href="/sproductlist/" class="card">
+        <i class="fas fa-seedling"></i>
+        <h3>Manage Products</h3>
+        <p>Add, edit, or remove plants from the catalog.</p>
+    </a>
+
+    <a href="/sellerlist/" class="card">
+        <i class="fas fa-users"></i>
+        <h3>Manage Sellers</h3>
+        <p>View and manage Sellers accounts.</p>
+    </a>
+
+    <a href="/deliverypersonlist/" class="card">
+        <i class="fas fa-user-check"></i>
+        <h3>Verify Delivery Persons</h3>
+        <p>Validate and manage delivery personnel.</p>
+    </a>
+
+    <a href="/feedbacklist/" class="card">
+        <i class="fas fa-comment"></i>
+        <h3>Feedback</h3>
+        <p>View customer feedback and reviews.</p>
+    </a>
+
+    <a href="/orders/" class="card">
+        <i class="fas fa-shopping-cart"></i>
+        <h3>Orders</h3>
+        <p>View and manage customer orders.</p>
+    </a>
+
+    <a href="/delivered_orders/" class="card">
+        <i class="fas fa-check-circle"></i>
+        <h3>Delivered Orders</h3>
+        <p>Track and review completed deliveries.</p>
+    </a>
+
+    <a href="/logout/" class="card">
+        <i class="fas fa-sign-out-alt"></i>
+        <h3>Logout</h3>
+        <p>Sign out of your account securely.</p>
+    </a>
+</div>
+
+<div class="footer">
+    © 2025 Plantique. All rights reserved.
+</div>
+
+</body>
+</html>

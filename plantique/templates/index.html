@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantique- Indoor Plants Marketplace</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display and Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        /* Carousel Styling */
+        .carousel-item {
+            display: none;
+        }
+        .carousel-item.active {
+            display: block;
+        }
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="font-poppins bg-green-100 text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-green-600 font-playfair">Plantique</a>
+                </div>
+                <!-- Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="register/" class="text-green-600 hover:text-green-600 transition duration-300">Register</a>
+                    <a href="login/" class="text-green-600 hover:text-green-600 transition duration-300">Login</a>
+                    <a href="about/" class="text-green-600 hover:text-green-600 transition duration-300">About</a>
+                    <a href="#shop" class="text-green-600 hover:text-green-600 transition duration-300">Shop</a>
+                    {% comment %} <a href="#sell" class="text-green-600 hover:text-green-600 transition duration-300">Sell</a> {% endcomment %}
+                    <a href="#contact" class="text-green-600 hover:text-green-600 transition duration-300">Contact</a>
+                </div>
+                <!-- Cart and User Icons -->
+                <div class="flex space-x-4">
+                    <a href="/cartlist/" class="text-gray-600 hover:text-green-600"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="/profile/" class="text-gray-600 hover:text-green-600"><i class="fas fa-user"></i></a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-600 hover:text-green-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-4 pt-2 pb-3 space-y-1">
+                <a href="#register" class="block text-gray-600 hover:text-green-600 px-3 py-2">Register</a>
+                <a href="#login" class="block text-gray-600 hover:text-green-600 px-3 py-2">Login</a>
+                <a href="#home" class="block text-gray-600 hover:text-green-600 px-3 py-2">Home</a>
+                <a href="#shop" class="block text-gray-600 hover:text-green-600 px-3 py-2">Shop</a>
+                <a href="#sell" class="block text-gray-600 hover:text-green-600 px-3 py-2">Sell</a>
+                <a href="#contact" class="block text-gray-600 hover:text-green-600 px-3 py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Carousel -->
+    <section id="home" class="relative h-screen">
+        <div class="carousel w-full h-full">
+            <!-- Carousel Item 1 -->
+            <div class="carousel-item active w-full h-full">
+                <img src="https://images.pexels.com/photos/793012/pexels-photo-793012.jpeg" alt="Indoor Plant 1" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div class="text-center text-white animate-fadeInUp">
+                        <h1 class="text-3xl md:text-5xl font-playfair mb-4">Discover Your Perfect Plant</h1>
+                        <p class="text-lg md:text-xl mb-6">Grow your green space with us</p>
+                        <a href="#shop" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition duration-300">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel Item 2 -->
+            <div class="carousel-item w-full h-full">
+                <img src="https://images.pexels.com/photos/3094211/pexels-photo-3094211.jpeg?cs=srgb&dl=pexels-valeria-ushakova-603898-3094211.jpg&fm=jpg&_gl=1*167v7r0*_ga*MjA5NDE2OTY5MC4xNzQ3OTY2Mzg5*_ga_8JE65Q40S6*czE3NTU1MTIzNzckbzkkZzEkdDE3NTU1MTI1MjIkajU5JGwwJGgw" alt="Indoor Plant 2" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <div class="text-center text-white animate-fadeInUp">
+                        <h1 class="text-4xl md:text-6xl font-playfair mb-4">Discover Your Perfect Plant</h1>
+                        <p class="text-lg md:text-xl mb-6">Grow your green space with us</p>
+                        <a href="#sell" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition duration-300">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel Controls -->
+        <button id="prev-slide" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl"><i class="fas fa-chevron-left"></i></button>
+        <button id="next-slide" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl"><i class="fas fa-chevron-right"></i></button>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-playfair text-center mb-12">Explore Our Collection</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Plant Cards -->
+                <div class="group bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1620803366004-119b57f54cd6" alt="Chinese Evergreen" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Chinese Evergreen</h3>
+                        <p class="text-gray-600">₹245.00</p>
+                        <a href="userproductlist/" class="mt-4 inline-block text-green-600 hover:text-green-700"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+                    </div>
+                </div>
+                <div class="group bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1607776996766-8b9e3ae74f5c" alt="Zz plant" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Zz Plant</h3>
+                        <p class="text-gray-600">₹250.00</p>
+                        <a href="userproductlist/" class="mt-4 inline-block text-green-600 hover:text-green-700"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+                    </div>
+                </div>
+                <div class="group bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1625582598943-2445bb7b8253" alt="Monstera" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Monstera</h3>
+                        <p class="text-gray-600">₹850.00</p>
+                        <a href="userproductlist/" class="mt-4 inline-block text-green-600 hover:text-green-700"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+                    </div>
+                </div>
+                <div class="group bg-gray-100 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <img src="https://images.unsplash.com/photo-1521503862198-2ae9a997bbc9" alt="Echeveria" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Echeveria</h3>
+                        <p class="text-gray-600">₹150.00</p>
+                        <a href="userproductlist/" class="mt-4 inline-block text-green-600 hover:text-green-700"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-playfair text-center mb-12">Get in Touch</h2>
+            <div class="bg-gray-50 shadow-md rounded-2xl p-8">
+                <div class="space-y-6">
+                    <div class="flex items-center">
+                        <i class="fas fa-envelope text-green-600 text-2xl w-8"></i>
+                        <span class="ml-4 text-lg text-gray-700">support@Plantique.com</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-phone text-green-600 text-2xl w-8"></i>
+                        <span class="ml-4 text-lg text-gray-700">+91 1234567890</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt text-green-600 text-2xl w-8"></i>
+                        <span class="ml-4 text-lg text-gray-700">123 Green Street, Plant City, PC 12345</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p>© 2025 Plantique. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-green-600"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-green-600"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-green-600"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Carousel Functionality
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const prevButton = document.getElementById('prev-slide');
+        const nextButton = document.getElementById('next-slide');
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            carouselItems.forEach((item, i) => {
+                item.classList.remove('active');
+                if (i === index) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            showSlide(currentIndex);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            showSlide(currentIndex);
+        });
+
+        // Auto-scroll Carousel
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            showSlide(currentIndex);
+        }, 5000);
+    </script>
+</body>
+</html>

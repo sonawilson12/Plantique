@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy Product - Plantique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e8f5e9;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)),
+                url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #e0f0e9;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border: 2px solid #2e7d32; /* dark green border */
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #cce0d4;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .value {
+            margin-left: 10px;
+            color: #333;
+        }
+
+        .product-img {
+            width: 130px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 8px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="tel"] {
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        .btn-submit {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #388e3c;
+        }
+
+        .cancel-link {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #dc3545;
+            font-size: 15px;
+        }
+
+        .cancel-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Plantique - Buy Product
+    </header>
+
+    <div class="container">
+        <h2>Buy Product</h2>
+
+        <!-- User Details Section -->
+        <div class="section">
+            <h3>User Details</h3>
+            <p><span class="label">Name:</span> <span class="value">{{ user.name }}</span></p>
+            <p><span class="label">Email:</span> <span class="value">{{ user.email }}</span></p>
+            <p><span class="label">Age:</span> <span class="value">{{ user.age }}</span></p>
+            <img src="{{ user.image.url }}" alt="User Image" class="product-img">
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="section">
+            <h3>Product Details</h3>
+            <p><span class="label">Name:</span> <span class="value">{{ p.name }}</span></p>
+            <p><span class="label">Price:</span> <span class="value">₹{{ p.price }}</span></p>
+            <p><span class="label">Quantity Available:</span> <span class="value">{{ p.quantity }}</span></p>
+            <img src="{{ p.image.url }}" alt="Product Image" class="product-img">
+        </div>
+
+        <!-- Shipping and Form Section -->
+        <div class="section">
+            <h3>Shipping Details</h3>
+            <form method="POST" action="{% url 'submit_buyitem' c.id %}">
+                {% csrf_token %}
+                
+                <label for="address">Address:</label>
+                <input type="text" name="address" id="address" required>
+
+                <label for="phone_no">Phone Number:</label>
+                <input type="tel" name="phone_no" id="phone_no" pattern="[0-9]{10}" required placeholder="10-digit number">
+
+                <input type="submit" value="Buy Now" class="btn-submit">
+            </form>
+
+            <a href="{% url 'cartlist' %}" class="cancel-link">Cancel</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2025 Plantique. All rights reserved.
+    </div>
+</body>
+</html>

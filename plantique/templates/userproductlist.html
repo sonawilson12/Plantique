@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products - Plantique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e8f5e9;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: #e0f0e9;
+            border-radius: 12px;
+            border: 2px solid #1e8449;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            min-height: 320px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .product-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0;
+        }
+
+        .product-details {
+            padding: 15px 20px;
+            min-height: 100px;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #34495e;
+        }
+
+        .product-info {
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            color: #555;
+        }
+
+        .product-price {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .add-to-cart-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart-button i {
+            margin-right: 8px;
+            font-size: 0.85rem;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #388e3c;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .pagination a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .pagination a:hover {
+            color: #2e7d32;
+            text-decoration: underline;
+        }
+
+        .empty-products {
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            padding: 40px;
+            grid-column: 1 / -1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                font-size: 1.3rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .product-actions {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Plantique - Browse Products
+    </header>
+
+    <div class="container">
+        {% if p %}
+            {% for product in p %}
+                <div class="product-card">
+                    {% if product.image %}
+                        <img src="/media/{{ product.image }}" alt="Image of {{ product.name }}" class="product-image">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x180?text=No+Image" alt="No image" class="product-image">
+                    {% endif %}
+                    <div class="product-details">
+                        <div class="product-name">{{ product.name }}</div>
+                        <div class="product-info">Quantity: {{ product.quantity }}</div>
+                        <div class="product-price">₹{{ product.price }}</div>
+                    </div>
+                    <div class="product-actions">
+                        <a href="{% url 'addtocart' product.id %}" class="add-to-cart-button"><i class="fas fa-cart-plus"></i>Add to Cart</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="empty-products">No products available.</p>
+        {% endif %}
+    </div>
+
+    <div class="pagination">
+        <!-- Placeholder for pagination; update with actual logic if view supports it -->
+        <a href="?page=next">Next Page</a>
+    </div>
+
+    <div class="footer">
+        © 2025 Plantique. All rights reserved.
+    </div>
+</body>
+</html>

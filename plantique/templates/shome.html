@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller Home - Plantique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), 
+                url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-links {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-links a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .full-card {
+            background: white;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-decoration: none;
+            color: #2E7D32;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            width: 100%;
+            transition: transform 0.15s ease-in-out;
+        }
+
+        .full-card i {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        /* Click animation */
+        .full-card:active {
+            transform: scale(0.96);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 20px;
+            color: #999;
+            font-size: 0.8rem;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    Welcome to Plantique - Seller Panel
+    <div class="header-links">
+        <a href="/sprofile/"><i class="fas fa-user-circle"></i> Profile</a>
+        <a href="/logout/"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+</header>
+
+<div class="container">
+    <a href="/saddproduct/" class="full-card">
+        <i class="fas fa-plus-circle"></i>
+        <span>Add Product</span>
+    </a>
+
+    <a href="/sproductlist/" class="full-card">
+        <i class="fas fa-seedling"></i>
+        <span>Products</span>
+    </a>
+</div>
+
+<div class="footer">
+    © 2025 Plantique. All rights reserved.
+</div>
+
+</body>
+</html>

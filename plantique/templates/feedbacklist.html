@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantique - Feedback List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), 
+                              url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #e0f0e9; /* Match delivery-table background */
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            border: 2px solid #2e7d32; /* Thin dark green border */
+        }
+
+        .feedback-item {
+            background: #e0f0e9; /* Match delivery-table background */
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+
+        .feedback-item h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .feedback-item p {
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .stars {
+            display: inline-flex;
+            gap: 5px;
+            direction: ltr;
+        }
+
+        .stars i {
+            font-size: 1.2rem;
+            color: #ddd; /* Gray outline by default */
+        }
+
+        .stars .filled {
+            font-weight: 900; /* Solid star */
+            color: #4CAF50; /* Green fill */
+        }
+
+        .empty-feedback {
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            padding: 40px;
+            background: #e0f0e9; /* Match empty-delivery background */
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #999;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Plantique - All Feedbacks
+    </header>
+
+    <div class="container">
+        {% if feedbacks %}
+            {% for fb in feedbacks %}
+                <div class="feedback-item">
+                    <h3>{{ fb.name }} <small>({{ fb.email }})</small></h3>
+                    <div class="stars">
+                        {% for i in "54321" %}
+                            {% if i|add:"0" <= fb.rating %}
+                                <i class="fas fa-star filled"></i>
+                            {% else %}
+                                <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p>{{ fb.message }}</p>
+                    <small>Submitted on: {{ fb.submitted_at|date:"M d, Y H:i" }}</small>
+                </div>
+            {% empty %}
+                <p class="empty-feedback">No feedback submitted yet.</p>
+            {% endfor %}
+        {% else %}
+            <p class="empty-feedback">No feedback submitted yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        © 2025 Plantique. All rights reserved.
+    </div>
+</body>
+</html>

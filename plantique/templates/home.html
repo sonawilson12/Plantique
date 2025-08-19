@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Indoor Plant Shop - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), 
+                url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: flex-end; /* icons aligned right */
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        /* centered heading */
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-icon {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .header-icon:hover {
+            color: #e8f5e9;
+            transform: scale(1.1);
+        }
+
+        .header-icon .tooltip {
+            visibility: hidden;
+            background-color: #2e7d32;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            right: 0;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .header-icon:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #006400;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin: 10px 0 5px;
+            font-size: 1.2rem;
+            color: rgb(20, 52, 20);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #999;
+            font-size: 0.8rem;
+            border-top: 1px solid #ccc;
+            padding: 15px 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                font-size: 1.3rem;
+                padding: 1rem;
+            }
+
+            .header-title {
+                position: static;
+                transform: none;
+                margin: auto;
+            }
+
+            .header-icons {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .header-icon {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                padding: 20px;
+            }
+
+            .card {
+                padding: 20px 10px;
+            }
+
+            .card i {
+                font-size: 2rem;
+            }
+
+            .card h3 {
+                font-size: 1rem;
+            }
+
+            .card p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <span class="header-title">Welcome to Plantique</span>
+    <div class="header-icons">
+        <a href="/profile/" class="header-icon">
+            <i class="fas fa-user-circle"></i>
+            <span class="tooltip">Profile</span>
+        </a>
+        <a href="/logout/" class="header-icon">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="tooltip">Logout</span>
+        </a>
+    </div>
+</header>
+
+<div class="container">
+    <a href="/userproductlist/">
+        <div class="card">
+            <i class="fas fa-seedling"></i>
+            <h3>View Product</h3>
+            <p>Browse all indoor plants.</p>
+        </div>
+    </a>
+    <a href="/cartlist/">
+        <div class="card">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Add to Cart</h3>
+            <p>Add your favorite plants to cart.</p>
+        </div>
+    </a>
+    <a href="/paylist/">
+        <div class="card">
+            <i class="fas fa-credit-card"></i>
+            <h3>Payment List</h3>
+            <p>View your payment history.</p>
+        </div>
+    </a>
+    <a href="/feedback/">
+        <div class="card">
+            <i class="fas fa-comment"></i>
+            <h3>Feedback</h3>
+            <p>Submit or view your feedback.</p>
+        </div>
+    </a>
+</div>
+
+<div class="footer">
+    © 2025 Plantique. All rights reserved.
+</div>
+
+</body>
+</html>

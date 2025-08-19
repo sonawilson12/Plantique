@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile - Plantique</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #e8f5e9;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .profile-container {
+            max-width: 400px;
+            background: white;
+            margin: 60px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            border: 2px solid #006400;
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .profile-container h2 {
+            color: #2e7d32;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .info-row label {
+            font-weight: 600;
+            color: #2e7d32;
+            margin-right: 10px;
+            min-width: 80px;
+            text-align: left;
+        }
+
+        .info-row p {
+            margin: 0;
+            color: #555;
+            text-align: right;
+            flex: 1;
+        }
+
+        .edit-button {
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #388e3c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Your Profile
+    </header>
+
+    <div class="profile-container">
+        {% if c.image %}
+            <img src="{{ c.image.url }}" alt="Profile Image" class="profile-image">
+        {% else %}
+            <img src="/static/default-user.png" alt="Default Profile" class="profile-image">
+        {% endif %}
+
+        <h2>{{ c.name }}</h2>
+
+        <div class="profile-info">
+            <div class="info-row">
+                <label>Email:</label>
+                <p>{{ c.email }}</p>
+            </div>
+            <div class="info-row">
+                <label>Age:</label>
+                <p>{{ c.age }}</p>
+            </div>
+            <div class="info-row">
+                <label>Password:</label>
+                <p>********</p>
+            </div>
+        </div>
+
+        <button class="edit-button" onclick="window.location.href='/editprofile/'">Edit Profile</button>
+    </div>
+
+    <div class="footer">
+        © 2025 Plantique. All rights reserved.
+    </div>
+</body>
+</html>

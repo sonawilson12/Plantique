@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantique - Feedback</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), 
+                              url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            border: 1px solid #2e7d32; /* Dark green outline */
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feedback-form label {
+            font-size: 0.95rem;
+            color: #444;
+            font-weight: 600;
+        }
+
+        .feedback-form input,
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #333;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .feedback-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .feedback-form input:focus,
+        .feedback-form textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            direction: ltr;
+        }
+
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 1.5rem;
+            color: #ddd; /* Colorless (gray outline) by default */
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star-rating label i {
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 400; /* Regular (outline) star */
+        }
+
+        .star-rating input[type="radio"]:checked + label i,
+        .star-rating input[type="radio"]:checked ~ label i {
+            font-weight: 900; /* Solid star */
+            color: #4CAF50;
+        }
+
+        .star-rating label:hover i,
+        .star-rating label:hover ~ label i {
+            font-weight: 900; /* Solid star */
+            color: #4CAF50;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            align-self: center;
+        }
+
+        .submit-btn:hover {
+            background-color: #388e3c;
+        }
+
+        .success-message {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 1rem;
+            margin-top: 20px;
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #999;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Plantique - Feedback
+    </header>
+
+    <div class="container">
+        <div class="welcome-message">
+            We value your feedback! 🌱<br>
+            Please share your thoughts with us.
+        </div>
+
+        {% if success %}
+            <div class="success-message">
+                Thank you for your feedback! 🌿
+            </div>
+        {% else %}
+            <form class="feedback-form" method="POST" action="{% url 'feedback' %}">
+                {% csrf_token %}
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name" value="">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email" value="">
+                </div>
+                <div>
+                    <label>Rating</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5" required>
+                        <label for="star5"><i class="far fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4"><i class="far fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3"><i class="far fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2"><i class="far fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1"><i class="far fa-star"></i></label>
+                    </div>
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required placeholder="Share your feedback"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Feedback</button>
+            </form>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        © 2025 Plantique. All rights reserved.
+    </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantique - Unassigned Orders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 80, 0, 0.05), rgba(0, 80, 0, 0.05)), url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%234caf50" fill-opacity="0.05" d="M0,160L48,170.7C96,181,192,203,288,192C384,181,480,139,576,122.7C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #e0f0e9;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .order-table th, .order-table td {
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .order-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .order-table tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .assign-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .assign-button:hover {
+            background-color: #2E7D32;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #555;
+            font-size: 1rem;
+            padding: 40px;
+            background: #e0f0e9;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+            margin: 40px auto;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Plantique - Unassigned Orders
+    </header>
+
+    <div class="container">
+        {% if orders %}
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Product Image</th>
+                        <th>User</th>
+                        <th>Product</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Order Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>
+                            {% if order.product.image %}
+                                <img src="{{ order.product.image.url }}" alt="{{ order.product.name|default:'Product' }}" class="product-image">
+                            {% else %}
+                                <img src="https://via.placeholder.com/80" alt="No image available" class="product-image">
+                            {% endif %}
+                        </td>
+                        <td>{{ order.user.name }}</td>
+                        <td>{{ order.product.name|default:"Not specified" }}</td>
+                        <td>{{ order.address|default:"Not provided" }}</td>
+                        <td>{{ order.phone_no|default:"Not provided" }}</td>
+                        <td>{{ order.ordered_at|date:"F d, Y H:i" }}</td>
+                        <td>
+                            <a href="{% url 'assigndelivery' order.id %}" class="assign-button">
+                                <i class="fas fa-truck"></i> Assign Delivery
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="empty-message">No unassigned orders available.</p>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        © 2025 Plantique. All rights reserved.
+    </div>
+</body>
+</html>
